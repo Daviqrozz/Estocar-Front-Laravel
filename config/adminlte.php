@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Esto</b>LTEcar',
+    'logo' => '<b>Esto</b>car',
     'logo_img' => 'vendor/adminlte/dist/img/car-logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -135,10 +135,10 @@ return [
 
     'usermenu_enabled' => true,
     'usermenu_header' => false,
-    'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
+    'usermenu_header_class' => 'bg-primary ',
+    'usermenu_image' => true,
     'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_profile_url' =>false,
 
     /*
     |--------------------------------------------------------------------------
@@ -301,7 +301,7 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type' => 'navbar-search',
+            'type' => 'usermenu',
             'text' => 'search',
             'topnav_right' => true,
         ],
@@ -309,13 +309,17 @@ return [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
+        [
+            'type' => 'darkmode-widget',
+            'topnav_right' => true,
+        ],
 
         // Sidebar items:
-        ['header' => 'Menu Lateral'],
+        ['header' => 'Menu'],
         [
             'text' => 'Dashboard',
             'url' => 'admin/settings',
-            'icon' => 'fas fa-tachometer-alt',
+            'icon' => 'fas fa-chart-bar',
         ],
         [
             'text' => 'Carros',
@@ -339,6 +343,21 @@ return [
                     'url' => '#',
                 ],
             ],
+        ],
+                [
+            'text' => 'Relatorios',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-file-alt',
+            'submenu' => [
+                [
+                    'text' => 'Relatorio de vendas',
+                    'url' => '#'
+                ],
+                [
+                    'text' => 'Relatorio de entradas',
+                    'url' => '#'
+                ],
+            ]
         ],
 
     ],
