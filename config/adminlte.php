@@ -357,6 +357,10 @@ return [
                     'text' => 'Relatorio de entradas',
                     'url' => '#'
                 ],
+                [
+                    'text' => 'Relatorio de servicos',
+                    'url' => '#'
+                ],
             ]
         ],
 

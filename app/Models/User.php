@@ -15,14 +15,4 @@ class User extends Authenticatable
     {
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->name);
     }
-
-    public function adminlte_desc()
-    {
-        return 'Usuário Estocar';
-    }
-
-    public function adminlte_profile_url()
-    {
-        return 'profile';
-    }
 }
