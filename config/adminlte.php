@@ -318,12 +318,12 @@ return [
         ['header' => 'Menu'],
         [
             'text' => 'Dashboard',
-            'url' => 'admin/settings',
+            'url' => '#',
             'icon' => 'fas fa-chart-bar',
         ],
         [
             'text' => 'Carros',
-            'url' => 'admin/settings',
+            'url' => '#',
             'icon' => 'fas fa-fw fa-car',
         ],
         [
@@ -336,10 +336,6 @@ return [
                 ],
                 [
                     'text' => 'Clientes',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'Fornecedores',
                     'url' => '#',
                 ],
             ],

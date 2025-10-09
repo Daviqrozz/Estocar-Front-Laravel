@@ -13,7 +13,7 @@
 
 @section('content')
     @include('dashboard.partials.shortcuts')
+    @include('dashboard.partials.charts')
 @endsection
 
-@section('content')
-@endsection
+
