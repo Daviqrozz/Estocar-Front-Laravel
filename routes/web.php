@@ -1,19 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
-Route::get('/login',function (){
-    return view('auth/login');
-});
-Route::get('/register',function (){
-    return view('auth/register');
-});
 
+Auth::routes();
 
 Route::get('/', function () {
-    return view('dashboard/dashboard');
+    return redirect('/login');
 });
 
-Route::get('/carros', function (){
-    return view('carros/carros');
-});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home')
+    ->middleware('auth');
+

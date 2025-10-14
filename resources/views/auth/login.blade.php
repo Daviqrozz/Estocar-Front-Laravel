@@ -20,7 +20,7 @@
     }
 @endphp
 
-@section('auth_header', ('Login'))
+@section('auth_header', __('adminlte::adminlte.login_message'))
 
 @section('auth_body')
     <form action="{{ $loginUrl }}" method="post">
@@ -69,7 +69,7 @@
                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                     <label for="remember">
-                        <span>Lembrar usuario</span>
+                        {{ __('adminlte::adminlte.remember_me') }}
                     </label>
                 </div>
             </div>
@@ -77,7 +77,7 @@
             <div class="col-5">
                 <button type=submit class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
                     <span class="fas fa-sign-in-alt"></span>
-                   Logar
+                    {{ __('adminlte::adminlte.sign_in') }}
                 </button>
             </div>
         </div>
@@ -85,13 +85,20 @@
 @stop
 
 @section('auth_footer')
-
+    {{-- Password reset link --}}
+    @if($passResetUrl)
+        <p class="my-0">
+            <a href="{{ $passResetUrl }}">
+                {{ __('adminlte::adminlte.i_forgot_my_password') }}
+            </a>
+        </p>
+    @endif
 
     {{-- Register link --}}
     @if($registerUrl)
         <p class="my-0">
             <a href="{{ $registerUrl }}">
-                Nao possui uma conta?
+                {{ __('adminlte::adminlte.register_a_new_membership') }}
             </a>
         </p>
     @endif
