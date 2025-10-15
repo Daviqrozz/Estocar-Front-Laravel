@@ -6,11 +6,12 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/', function () {
-    return redirect('/login');
+route::get('/',function () {
+    return redirect('/home');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('home')
     ->middleware('auth');
+
 

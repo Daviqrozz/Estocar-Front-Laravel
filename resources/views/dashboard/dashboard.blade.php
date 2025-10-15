@@ -1,10 +1,6 @@
 @extends('adminlte::page')
 
-@php
-    $adminlte = app('JeroenNoten\LaravelAdminLte\AdminLte');
-    Auth::loginUsingId(1); //DEBUG:apenas para testar o menu do usuário
-@endphp
- 
+
 @section('title', 'Dashboard')
 
 @section('content_header')

@@ -13,7 +13,11 @@
     }
 @endphp
 
-@section('auth_header', __('adminlte::adminlte.register_message'))
+@section('auth_header',)
+<div class="text-center">
+    <h3>Registrar</h3>
+</div>
+@endsection
 
 @section('auth_body')
     <form action="{{ $registerUrl }}" method="post">
@@ -22,7 +26,7 @@
         {{-- Name field --}}
         <div class="input-group mb-3">
             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                value="{{ old('name') }}" placeholder="{{ __('adminlte::adminlte.full_name') }}" autofocus>
+                value="{{ old('name') }}" placeholder="Nome completo" autofocus>
 
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -58,7 +62,7 @@
         {{-- Password field --}}
         <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                placeholder="{{ __('adminlte::adminlte.password') }}">
+                placeholder="Senha" value="{{old ('password') }}">
 
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -77,7 +81,7 @@
         <div class="input-group mb-3">
             <input type="password" name="password_confirmation"
                 class="form-control @error('password_confirmation') is-invalid @enderror"
-                placeholder="{{ __('adminlte::adminlte.retype_password') }}">
+                placeholder="Confirme sua senha">
 
             <div class="input-group-append">
                 <div class="input-group-text">
@@ -95,7 +99,7 @@
         {{-- Register button --}}
         <button type="submit" class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
             <span class="fas fa-user-plus"></span>
-            {{ __('adminlte::adminlte.register') }}
+            Registrar
         </button>
     </form>
 @stop
@@ -103,7 +107,7 @@
 @section('auth_footer')
     <p class="my-0">
         <a href="{{ $loginUrl }}">
-            {{ __('adminlte::adminlte.i_already_have_a_membership') }}
+            Ja possui uma conta?
         </a>
     </p>
 @stop
