@@ -323,7 +323,7 @@ return [
         ],
         [
             'text' => 'Carros',
-            'url' => '#',
+            'url' => '/carros',
             'icon' => 'fas fa-fw fa-car',
         ],
         [

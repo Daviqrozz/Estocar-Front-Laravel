@@ -6,8 +6,12 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-route::get('/',function () {
+Route::get('/',function () {
     return redirect('/home');
+});
+
+Route::get('/carros',function () {
+    return view('carros/carros');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
