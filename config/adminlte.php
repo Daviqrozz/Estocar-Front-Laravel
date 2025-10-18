@@ -318,7 +318,7 @@ return [
         ['header' => 'Menu'],
         [
             'text' => 'Dashboard',
-            'url' => '#',
+            'url' => '/',
             'icon' => 'fas fa-chart-bar',
         ],
         [
