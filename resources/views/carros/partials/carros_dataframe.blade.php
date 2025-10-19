@@ -1,20 +1,26 @@
-<div class="card">
-<div class="d-flex justify-content-between align-items-center card-header w-100">
-    
-    <h3 class="card-title mb-0">Lista de veículos cadastrados</h3> 
-     
-    <div class="card-date">
-        <span>Ultima atualização: 10/18/2025 19:43</span>
-    </div>
-    <div class="l-100% d-flex align-items-center ms-auto"> 
-        <label for="car_searchbar" class="mr-1 mb-0">Pesquisar: </label>
-        <input type="text" name="search" placeholder="Marca,modelo,ano,cor" id="car_searchbar">
-    </div>
+@extends('adminlte::page')
+
+@section('title', 'Carros')
+
+@section('content_header')
+<div class="d-flex justify-content-between align-items-center">
+    <h2>Carros cadastrados na plataforma</h2>
+    <a href="#" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Cadastrar
+    </a>
 </div>
+@endsection
+
+@section('content')
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Lista de veículos</h3>
+    </div>
 
     <div class="card-body">
-        <table id="example2" class="table table-bordered table-hover dataTable dtr-inline">
-            <thead class="table-dark">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
                     <th>Marca / Modelo</th>
@@ -27,78 +33,92 @@
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>Volkswagen Gol 1.6</td>
-                    <td>2018</td>
-                    <td>ABC-1234</td>
-                    <td><span class="badge bg-success">Disponível</span></td>
-                    <td>R$ 45.900</td>
+                    <td>
+                        <a href="/carros/editar/1" class="text-primary">
+                            Toyota Corolla XEi
+                        </a>
+                    </td>
+                    <td>2021</td>
+                    <td>ABC-1D23</td>
+                    <td>
+                        <select class="status-select form-control form-control-sm text-white font-weight-bold">
+                            <option value="disponivel" selected>Disponível</option>
+                            <option value="manutencao">Em manutenção</option>
+                            <option value="vendido">Vendido</option>
+                        </select>
+                    </td>
+                    <td>R$ 75.000,00</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>Chevrolet Onix LT 1.4</td>
+                    <td>
+                        <a href="/carros/editar/2" class="text-primary">
+                            Honda Civic Touring
+                        </a>
+                    </td>
                     <td>2020</td>
-                    <td>DEF-5678</td>
-                    <td><span class="badge bg-warning">Em revisão</span></td>
-                    <td>R$ 68.300</td>
+                    <td>XYZ-9F87</td>
+                    <td>
+                        <select class="status-select form-control form-control-sm text-white font-weight-bold">
+                            <option value="disponivel">Disponível</option>
+                            <option value="manutencao" selected>Em manutenção</option>
+                            <option value="vendido">Vendido</option>
+                        </select>
+                    </td>
+                    <td>R$ 82.500,00</td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>Honda Civic EXL 2.0</td>
+                    <td>
+                        <a href="/carros/editar/3" class="text-primary">
+                            Volkswagen Polo MSI
+                        </a>
+                    </td>
                     <td>2019</td>
-                    <td>GHI-9012</td>
-                    <td><span class="badge bg-success">Disponível</span></td>
-                    <td>R$ 108.000</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Fiat Strada Freedom 1.3</td>
-                    <td>2021</td>
-                    <td>JKL-3456</td>
-                    <td><span class="badge bg-danger">Vendido</span></td>
-                    <td>R$ 89.700</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Renault Duster 1.6</td>
-                    <td>2017</td>
-                    <td>MNO-7890</td>
-                    <td><span class="badge bg-secondary">Reservado</span></td>
-                    <td>R$ 59.800</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Toyota Corolla XEi 2.0</td>
-                    <td>2022</td>
-                    <td>PQR-1235</td>
-                    <td><span class="badge bg-success">Disponível</span></td>
-                    <td>R$ 132.500</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>Hyundai HB20 Comfort 1.0</td>
-                    <td>2019</td>
-                    <td>STU-6789</td>
-                    <td><span class="badge bg-danger">Vendido</span></td>
-                    <td>R$ 58.400</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>Ford Ka SE 1.0</td>
-                    <td>2018</td>
-                    <td>VWX-2468</td>
-                    <td><span class="badge bg-warning">Em revisão</span></td>
-                    <td>R$ 47.600</td>
+                    <td>JKL-3E45</td>
+                    <td>
+                        <select class="status-select form-control form-control-sm text-white font-weight-bold">
+                            <option value="disponivel">Disponível</option>
+                            <option value="manutencao">Em manutenção</option>
+                            <option value="vendido" selected>Vendido</option>
+                        </select>
+                    </td>
+                    <td>R$ 58.200,00</td>
                 </tr>
             </tbody>
         </table>
-        <div class="mt-1">
-            <Label for="count-select">Mostrar:</Label>
-                <select name="count" id="count-select">
-                    <option value="10">10</option>
-                    <option value="40">40</option>
-                    <option value="80">80</option>
-                    <option value="120">120</option>
-                </select>
-        </div>
     </div>
 </div>
+
+{{-- Script que muda a cor automaticamente --}}
+@section('js')
+<script>
+    function updateSelectColor(select) {
+        const value = select.value;
+        select.style.color = '#fff';
+        select.style.borderColor = 'transparent';
+
+        switch (value) {
+            case 'disponivel':
+                select.style.backgroundColor = '#28a745'; // Verde
+                break;
+            case 'manutencao':
+                select.style.backgroundColor = '#ffc107'; // Amarelo
+                break;
+            case 'vendido':
+                select.style.backgroundColor = '#6c757d'; // Cinza
+                break;
+            default:
+                select.style.backgroundColor = '#007bff';
+        }
+    }
+
+    // Aplica ao carregar
+    document.querySelectorAll('.status-select').forEach(select => {
+        updateSelectColor(select);
+        select.addEventListener('change', () => updateSelectColor(select));
+    });
+</script>
+@endsection
+
+@endsection
