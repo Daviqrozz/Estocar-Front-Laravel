@@ -88,6 +88,14 @@
             </tbody>
         </table>
     </div>
+    <div class="m-2">
+        <label class="mr-1" for="select_count">Mostrar:</label>
+        <select name="count" id="select_count">
+            <option value="10">10</option>
+            <option value="10">50</option>
+            <option value="10">100</option>
+        </select>
+    </div>
 </div>
 
 {{-- Script que muda a cor automaticamente --}}

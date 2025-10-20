@@ -332,11 +332,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'Usuarios',
-                    'url' => '#',
+                    'url' => '/usuarios',
                 ],
                 [
                     'text' => 'Clientes',
-                    'url' => '#',
+                    'url' => '/clientes',
                 ],
             ],
         ],
