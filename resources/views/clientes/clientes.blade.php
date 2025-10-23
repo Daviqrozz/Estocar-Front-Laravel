@@ -35,7 +35,7 @@
                     <td>1</td>
                     <td>
                         <a href="/clientes/editar/1" class="text-primary">
-                            João Silv
+                            João Silva
                         </a>
                     </td>
                     <td>joao.silva@example.com</td>

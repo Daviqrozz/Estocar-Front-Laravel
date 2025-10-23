@@ -82,7 +82,10 @@ Route::prefix('clientes')->group(function () {
 */
 
 Route::prefix('relatorios')->group(function () {
-    Route::get('/', function () {
-        return view('relatorios.index');
-    })->name('relatorios.index');
+    Route::get('/vendas', function () {
+        return view('relatorios.vendas');
+    })->name('relatorios.vendas');
+     Route::get('/entradas', function () {
+        return view('relatorios.entradas');
+    })->name('relatorios.entradas');
 });

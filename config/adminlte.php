@@ -347,15 +347,11 @@ return [
             'submenu' => [
                 [
                     'text' => 'Relatorio de vendas',
-                    'url' => '#'
+                    'url' => '/relatorios/vendas'
                 ],
                 [
                     'text' => 'Relatorio de entradas',
-                    'url' => '#'
-                ],
-                [
-                    'text' => 'Relatorio de servicos',
-                    'url' => '#'
+                    'url' => '/relatorios/entradas'
                 ],
             ]
         ],
