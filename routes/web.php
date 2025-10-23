@@ -47,11 +47,11 @@ Route::prefix('usuarios')->group(function () {
     })->name('usuarios.users');
 
     Route::get('/criar', function () {
-        return view('usuarios.criar');
+        return view('users.criar');
     })->name('users.criar');
 
     Route::get('/editar/{usuario}', function () {
-        return view('usuarios.editar');
+        return view('users.editar');
     })->name('users.editar');
 });
 
