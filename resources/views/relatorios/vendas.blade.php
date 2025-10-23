@@ -68,6 +68,7 @@
                     <th>Carro</th>
                     <th>Data da Venda</th>
                     <th>Valor (R$)</th>
+                    <th>Usuario</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -78,24 +79,10 @@
                     <td>Fiat Argo</td>
                     <td>10/10/2025</td>
                     <td>58.900,00</td>
+                    <td>{{Auth::user()->name}}</td>
                     <td><span class="badge bg-success">Concluída</span></td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Maria Souza</td>
-                    <td>Chevrolet Onix</td>
-                    <td>15/10/2025</td>
-                    <td>64.500,00</td>
-                    <td><span class="badge bg-warning">Pendente</span></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Lucas Pereira</td>
-                    <td>Honda Civic</td>
-                    <td>18/10/2025</td>
-                    <td>112.000,00</td>
-                    <td><span class="badge bg-danger">Cancelada</span></td>
-                </tr>
+
             </tbody>
         </table>
     </div>
