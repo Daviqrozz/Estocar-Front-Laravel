@@ -1,91 +1,69 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ViewController;
 
-Auth::routes();
-
-// Redireciona para /home ao acessar a raiz
+// Redireciona a raiz para /home
 Route::get('/', function () {
     return redirect('/home');
 });
 
-// Dashboard principal
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
-    ->name('home')
-    ->middleware('auth');
+// Rota de Login: Apenas exibe o formulário. O JS lida com o POST e localStorage.
+Route::get('login', [ViewController::class, 'render'])->name('login')->defaults('viewName', 'auth.login');
 
-/*
-|--------------------------------------------------------------------------
-| Rotas de Carros
-|--------------------------------------------------------------------------
-*/
+Route::get('register', [ViewController::class, 'render'])->name('register')->defaults('viewName', 'auth.register');
+
+// Rota de Logout: Endpoint simples para limpar a sessão/redirecionar (se necessário)
+Route::post('logout', function () {
+    return redirect()->route('login');
+})->name('logout');
+
+
+
+// Dashboard principa
+Route::get('/home', [ViewController::class, 'render'])->name('home')->defaults('viewName', 'dashboard.dashboard');
+
 
 Route::prefix('carros')->group(function () {
-    Route::get('/', function () {
-        return view('carros.carros');
-    })->name('carros.index');
-
-    Route::get('/criar', function () {
-        return view('carros.criar');
-    })->name('carros.criar');
-
-    Route::get('/editar/{carro}', function () {
-        return view('carros.editar');
-    })->name('carros.editar');
+    // Nome da view: carros.carros
+    Route::get('/', [ViewController::class, 'render'])->name('carros.index')->defaults('viewName', 'carros.carros');
+    
+    // Nome da view: carros.criar
+    Route::get('/criar', [ViewController::class, 'render'])->name('carros.criar')->defaults('viewName', 'carros.criar');
+    
+    // Nome da view: carros.editar
+    Route::get('/editar/{carro}', [ViewController::class, 'render'])->name('carros.editar')->defaults('viewName', 'carros.editar');
 });
 
-/*
-|--------------------------------------------------------------------------
-| Rotas de Usuários
-|--------------------------------------------------------------------------
-*/
 
 Route::prefix('usuarios')->group(function () {
-    Route::get('/', function () {
-        return view('users.users');
-    })->name('usuarios.users');
+    // Nome da view: users.users
+    Route::get('/', [ViewController::class, 'render'])->name('usuarios.users')->defaults('viewName', 'users.users');
 
-    Route::get('/criar', function () {
-        return view('users.criar');
-    })->name('users.criar');
+    // Nome da view: users.criar
+    Route::get('/criar', [ViewController::class, 'render'])->name('users.criar')->defaults('viewName', 'users.criar');
 
-    Route::get('/editar/{usuario}', function () {
-        return view('users.editar');
-    })->name('users.editar');
+    // Nome da view: users.editar
+    Route::get('/editar/{usuario}', [ViewController::class, 'render'])->name('users.editar')->defaults('viewName', 'users.editar');
 });
 
-/*
-|--------------------------------------------------------------------------
-| Rotas de Clientes
-|--------------------------------------------------------------------------
-*/
 
 Route::prefix('clientes')->group(function () {
-    Route::get('/', function () {
-        return view('clientes.clientes');
-    })->name('clientes.clientes');
+    // Nome da view: clientes.clientes
+    Route::get('/', [ViewController::class, 'render'])->name('clientes.clientes')->defaults('viewName', 'clientes.clientes');
 
-    Route::get('/criar', function () {
-        return view('clientes.criar');
-    })->name('clientes.criar');
+    // Nome da view: clientes.criar
+    Route::get('/criar', [ViewController::class, 'render'])->name('clientes.criar')->defaults('viewName', 'clientes.criar');
 
-    Route::get('/editar/{cliente}', function () {
-        return view('clientes.editar');
-    })->name('clientes.editar');
+    // Nome da view: clientes.editar
+    Route::get('/editar/{cliente}', [ViewController::class, 'render'])->name('clientes.editar')->defaults('viewName', 'clientes.editar');
 });
 
-/*
-|--------------------------------------------------------------------------
-| Rotas de Relatórios
-|--------------------------------------------------------------------------
-*/
 
 Route::prefix('relatorios')->group(function () {
-    Route::get('/vendas', function () {
-        return view('relatorios.vendas');
-    })->name('relatorios.vendas');
-     Route::get('/entradas', function () {
-        return view('relatorios.entradas');
-    })->name('relatorios.entradas');
+    // Nome da view: relatorios.vendas
+    Route::get('/vendas', [ViewController::class, 'render'])->name('relatorios.vendas')->defaults('viewName', 'relatorios.vendas');
+    
+    // Nome da view: relatorios.entradas
+    Route::get('/entradas', [ViewController::class, 'render'])->name('relatorios.entradas')->defaults('viewName', 'relatorios.entradas');
 });
