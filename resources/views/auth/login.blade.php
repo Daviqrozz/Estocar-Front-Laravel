@@ -54,7 +54,7 @@
         const password = form.password.value;
         const errorMessage = document.getElementById('error-message');
         const loginButton = document.getElementById('login-button');
-        const bu  ttonText = document.getElementById('button-text');
+        const buttonText = document.getElementById('button-text');
         const spinner = document.getElementById('spinner');
 
         // Limpa mensagens de erro anteriores

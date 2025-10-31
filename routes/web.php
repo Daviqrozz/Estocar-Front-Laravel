@@ -10,17 +10,13 @@ Route::get('/', function () {
 
 // Rota de Login: Apenas exibe o formulário. O JS lida com o POST e localStorage.
 Route::get('login', [ViewController::class, 'render'])->name('login')->defaults('viewName', 'auth.login');
-
+Route::get('logout', [ViewController::class, 'render'])->name('logout')->defaults('viewName', 'auth.logout');
 Route::get('register', [ViewController::class, 'render'])->name('register')->defaults('viewName', 'auth.register');
 
 // Rota de Logout: Endpoint simples para limpar a sessão/redirecionar (se necessário)
-Route::post('logout', function () {
-    return redirect()->route('login');
-})->name('logout');
 
 
-
-// Dashboard principa
+// Dashboard principal
 Route::get('/home', [ViewController::class, 'render'])->name('home')->defaults('viewName', 'dashboard.dashboard');
 
 
