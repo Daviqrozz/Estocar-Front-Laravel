@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ViewController;
+use App\Http\Controllers\CarroViewController;
 
 // Redireciona a raiz para /home
 Route::get('/', function () {
@@ -25,7 +26,7 @@ Route::prefix('carros')->group(function () {
     Route::get('/criar', [ViewController::class, 'render'])->name('carros.criar')->defaults('viewName', 'carros.criar');
     
     // Nome da view: carros.editar
-    Route::get('/editar/{carro}', [ViewController::class, 'render'])->name('carros.editar')->defaults('viewName', 'carros.editar');
+    Route::get('/editar/{carro}', [CarroViewController::class, 'update'])->name('carros.editar');
 });
 
 
