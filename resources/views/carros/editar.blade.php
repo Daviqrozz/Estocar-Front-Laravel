@@ -3,7 +3,19 @@
 @section('title', 'Editar Carro')
 
 @section('content_header')
+<div class="d-flex justify-content-between">
+
     <h2>Editar Veículo - <span id="carro-id">{{ $carroId }}</span></h2>
+
+    <div class="" id="delete-button-container">
+        <form id="delete_carro_form">
+        <button type="submit" id="delete_carro_btn" class="btn btn-danger">
+            <i class="fas fa-trash"></i> Excluir Veículo
+        </button>
+    </form>
+    </div>
+</div>
+    
 @stop
 
 @section('content')
@@ -19,7 +31,7 @@
                 <i class="fas fa-spinner fa-spin fa-2x"></i> Carregando dados do carro...
             </div>
 
-            <form id="edit-carro-form" style="display:none;">
+            <form id="edit_carro_form" style="display:none;">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -54,15 +66,17 @@
 
                 </div>
 
-         
-                    <label for="status">Status</label>
-                     <select id="status" name="status" class="status-select form-control form-control-sm text-white font-weight-bold">
-                        <option value="disponivel" id="available_option_status">Disponível</option>
-                        <option value="indisponivel" id="unavailable_option_status">Indísponivel</option>
-                    </select>
-              
+                <label for="status">Status</label>
+                <select id="status" name="status"
+                    class="status-select form-control form-control-sm text-white font-weight-bold">
+                    <option value="disponivel" id="available_option_status">Disponível</option>
+                    <option value="indisponivel" id="unavailable_option_status">Indísponivel</option>
+                </select>
 
-                <button type="submit" class="btn btn-primary mt-3">Salvar Alterações</button>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary mt-3">Salvar Alterações</button>
+                </div>
+
             </form>
 
             <div id="error-message" class="alert alert-danger mt-3" style="display:none;"></div>
@@ -76,6 +90,7 @@
         const API_URL = 'http://estocar-1.test/api';
         const CAR_FETCH_ENDPOINT = `/lista/carros/${CARRO_ID}`; // Endpoint GET para buscar um carro
         const CAR_UPDATE_ENDPOINT = `/editar/carro/${CARRO_ID}`; // Endpoint PUT para atualizar o carro
+        const CAR_DELETE_ENDPOINT =  `/deletar/carro/${CARRO_ID}` //Endopoint DELETE para deletar o carro
 
         //Função padrão para realizar uma requisição para a API
         async function apiFetch(endpoint, options = {}) {
@@ -114,13 +129,11 @@
             return response;
         }
 
-
-    
         async function loadCarData() {
-            
+
             const formContainer = document.getElementById('carro-form-container');
             const loadingSpinner = document.getElementById('loading-spinner');
-            const form = document.getElementById('edit-carro-form');
+            const form = document.getElementById('edit_carro_form');
             const errorBox = document.getElementById('error-message');
 
             loadingSpinner.style.display = 'block';
@@ -135,14 +148,17 @@
                 if (response.ok) {
                     const data = await response.json();
 
-
                     const carro = data.carro || data;
+                    const valorFormatado = new Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    }).format(carro.preco || 0);
 
                     // Preenche o formulário com os dados
                     document.getElementById('marca').value = carro.marca || '';
                     document.getElementById('modelo').value = carro.modelo || '';
                     document.getElementById('ano').value = carro.ano || '';
-                    document.getElementById('preco').value = carro.preco || '';
+                    document.getElementById('preco').value = valorFormatado || '';
                     document.getElementById('cor').value = carro.cor || '';
 
                     const statusSelect = document.getElementById('status');
@@ -165,10 +181,10 @@
             }
         }
 
-        async function handleFormSubmit(event) {
+        async function handleEditFormSubmit(event) {
             event.preventDefault();
 
-            const form = document.getElementById('edit-carro-form');
+            const form = document.getElementById('edit_carro_form');
             const submitButton = form.querySelector('button[type="submit"]');
             const errorBox = document.getElementById('error-message');
 
@@ -176,17 +192,34 @@
             submitButton.disabled = true;
             submitButton.innerText = 'Salvando...';
 
+            function ValorBruto(ValorFormatado) {
+                if (!ValorFormatado) return 0;
+
+                let cleanString = ValorFormatado
+                    .replace(/[R$]/g, '')
+                    .trim()
+                    .replace(/\./g, '');
+
+                cleanString = cleanString.replace(/,/g, '.');
+
+                return parseFloat(cleanString) || 0;
+            }
+
+            const precoInput = form.elements['preco'].value
+
             // Coleta os dados do formulário
             const updateData = {
                 marca: form.elements['marca'].value,
                 modelo: form.elements['modelo'].value,
                 cor: form.elements['cor'].value,
-                preco: form.elements['preco'].value,
+
+                preco: ValorBruto(precoInput),
+
                 ano: form.elements['ano'].value,
-                status: (form.elements['status'].value === 'disponivel') ? 1 : 0    
+                status: (form.elements['status'].value === 'disponivel') ? 1 : 0
             };
 
-          
+
             try {
                 const response = await apiFetch(CAR_UPDATE_ENDPOINT, {
                     method: 'PUT',
@@ -208,15 +241,52 @@
                 submitButton.disabled = false;
                 submitButton.innerText = 'Salvar Alterações';
             }
+        }   
+
+
+        //Handle para deletar veiculo
+      
+        async function handleDeleteFormSubmit(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('delete_carro_form');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const errorBox = document.getElementById('error-message');
+
+            errorBox.style.display = 'none';
+            submitButton.disabled = true;
+            submitButton.innerText = 'Salvando...';
+
+            try {
+                const response = await apiFetch(CAR_DELETE_ENDPOINT, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    // Redireciona para a lista após o sucesso
+                    window.location.href = '{{ route('carros.index') }}';
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Erro desconhecido ao deletar.');
+                }
+            } catch (error) {
+                console.error("Falha ao deletar:", error);
+                errorBox.innerText = `Erro ao deletar: ${error.message}`;
+                errorBox.style.display = 'block';
+            } finally {
+                submitButton.disabled = false;
+                submitButton.innerText = 'Deletar';
+            }
         }
-
-
+ 
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
             // Verifica se o ID é válido e inicia o carregamento dos dados
             if (CARRO_ID && CARRO_ID !== 'ID_Placeholder') {
                 loadCarData();
-                document.getElementById('edit-carro-form').addEventListener('submit', handleFormSubmit);
+
+                document.getElementById('edit_carro_form').addEventListener('submit', handleEditFormSubmit);
+                document.getElementById('delete_carro_form').addEventListener('submit', handleDeleteFormSubmit);
             } else {
                 document.getElementById('carro-form-container').innerHTML =
                     '<div class="alert alert-danger">ID do carro inválido.</div>';

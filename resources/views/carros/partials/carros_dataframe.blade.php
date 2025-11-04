@@ -113,7 +113,7 @@
                 <option value="indisponivel" ${carro.status === 0 ? 'selected' : ''}>Indisponivel</option>
             `;
             
-            const valorFipeFormatado = new Intl.NumberFormat('pt-BR', {
+            const valorFormatado = new Intl.NumberFormat('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
             }).format(carro.preco || 0);
@@ -128,7 +128,7 @@
                     </a>
                 </td>
                 <td>${carro.ano}</td>
-                <td>${valorFipeFormatado}</td>
+                <td>${valorFormatado}</td>
                 <td>${carro.cor}</td>
                 <td>
                     <select class="status-select form-control form-control-sm text-white font-weight-bold" data-car-id="${carro.id}">
