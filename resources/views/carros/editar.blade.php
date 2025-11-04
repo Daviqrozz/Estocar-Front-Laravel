@@ -3,19 +3,19 @@
 @section('title', 'Editar Carro')
 
 @section('content_header')
-<div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between">
 
-    <h2>Editar Veículo - <span id="carro-id">{{ $carroId }}</span></h2>
+        <h2>Editar Veículo - <span id="carro-id">{{ $carroId }}</span></h2>
 
-    <div class="" id="delete-button-container">
-        <form id="delete_carro_form">
-        <button type="submit" id="delete_carro_btn" class="btn btn-danger">
-            <i class="fas fa-trash"></i> Excluir Veículo
-        </button>
-    </form>
+        <div class="" id="delete-button-container">
+            <form id="delete_carro_form">
+                <button type="submit" id="delete_carro_btn" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Excluir Veículo
+                </button>
+            </form>
+        </div>
     </div>
-</div>
-    
+
 @stop
 
 @section('content')
@@ -39,24 +39,34 @@
                             <input type="text" id="marca" name="marca" class="form-control" required>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="modelo">Modelo</label>
                             <input type="text" id="modelo" name="modelo" class="form-control" required>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="modelo">Valor (R$)</label>
-                            <input type="text" id="preco" name="preco" class="form-control" required>
+                            <label for="preco">Valor (R$)</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">R$</span>
+                                </div>
+                                <input type="number" step="0.01" name="preco" id="preco" class="form-control"
+                                    placeholder="Ex: 75000" required>
+                            </div>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="modelo">Cor do veiculo</label>
                             <input type="text" id="cor" name="cor" class="form-control" required>
                         </div>
                     </div>
+                    
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="modelo">Ano de fabricação</label>
@@ -90,7 +100,7 @@
         const API_URL = 'http://estocar-1.test/api';
         const CAR_FETCH_ENDPOINT = `/lista/carros/${CARRO_ID}`; // Endpoint GET para buscar um carro
         const CAR_UPDATE_ENDPOINT = `/editar/carro/${CARRO_ID}`; // Endpoint PUT para atualizar o carro
-        const CAR_DELETE_ENDPOINT =  `/deletar/carro/${CARRO_ID}` //Endopoint DELETE para deletar o carro
+        const CAR_DELETE_ENDPOINT = `/deletar/carro/${CARRO_ID}` //Endopoint DELETE para deletar o carro
 
         //Função padrão para realizar uma requisição para a API
         async function apiFetch(endpoint, options = {}) {
@@ -149,9 +159,8 @@
                     const data = await response.json();
 
                     const carro = data.carro || data;
+                    
                     const valorFormatado = new Intl.NumberFormat('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
                     }).format(carro.preco || 0);
 
                     // Preenche o formulário com os dados
@@ -241,11 +250,11 @@
                 submitButton.disabled = false;
                 submitButton.innerText = 'Salvar Alterações';
             }
-        }   
+        }
 
 
         //Handle para deletar veiculo
-      
+
         async function handleDeleteFormSubmit(event) {
             event.preventDefault();
 
@@ -278,7 +287,7 @@
                 submitButton.innerText = 'Deletar';
             }
         }
- 
+
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
             // Verifica se o ID é válido e inicia o carregamento dos dados
