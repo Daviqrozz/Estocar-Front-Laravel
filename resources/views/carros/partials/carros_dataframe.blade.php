@@ -172,16 +172,51 @@
         }
     }
 
-
-   
     document.addEventListener('DOMContentLoaded', fetchCarros);
     const EDIT_URL_BASE = "{{ url('/carros/editar') }}";
 
     window.viewCar = (id) => {
-       
         window.location.href = `${EDIT_URL_BASE}/${id}`; 
     };
-    window.deleteCar = (id) => { console.log(`Deletar carro ID: ${id}`);  };
+    window.deleteCar = async (id) => { // 1. Corrigido: Função definida como 'async'
+        
+        // 4. Melhoria de Usabilidade: Confirmação antes de deletar
+        if (!confirm(`Tem certeza que deseja deletar o carro ID ${id}? Esta ação não pode ser desfeita.`)) {
+            return; // Sai da função se o usuário cancelar
+        }
+        
+        // Você pode mostrar um feedback visual temporário aqui, se quiser
+        const rowElement = document.querySelector(`[onclick="deleteCar(${id})"]`).closest('tr');
+        const originalHtml = rowElement.innerHTML;
+        rowElement.style.opacity = 0.5;
+        
+        const CAR_DELETE_ENDPOINT = `/deletar/carro/${id}`; // 2. Corrigido: Define o endpoint DELETE com o ID
+        
+        try {
+            const response = await apiFetch(CAR_DELETE_ENDPOINT, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                // Se for bem-sucedido, remove a linha da tabela sem recarregar a página
+                rowElement.remove(); 
+                alert(`Carro ID ${id} deletado com sucesso!`);
+            } else {
+                // Tenta ler a mensagem de erro da API
+                const errorData = await response.json().catch(() => ({ message: 'Erro desconhecido.' }));
+                throw new Error(errorData.message || response.statusText);
+            }
+        } catch (error) {
+            console.error("Falha ao deletar:", error);
+            alert(`Falha ao deletar carro ID ${id}: ${error.message}`);
+            
+            // Reverte o estado visual (se falhar)
+            if(rowElement) {
+                rowElement.style.opacity = 1;
+            }
+
+        }
+    };
 
 </script>
 @endpush
