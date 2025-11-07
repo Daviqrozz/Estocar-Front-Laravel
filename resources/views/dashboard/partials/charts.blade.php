@@ -2,7 +2,7 @@
               <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
                 <h3 class="card-title">
                   <i class="fas fa-th mr-1"></i>
-                  Vendas
+                  Movimentação de Veiculos
                 </h3>
 
                 <div class="card-tools">
@@ -30,13 +30,12 @@
         <script>
             document.addEventListener("DOMContentLoaded", function() {
             const ctx = document.getElementById('line-chart').getContext('2d');
-
             new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
                     datasets: [{
-                        label: 'Vendas de Carros',
+                        label: 'Movimentação de Veiculos',
                         data: [12, 19, 3, 5, 2, 3],
                         fill: false,
                         backgroundColor: 'rgba(13, 122, 253, 1)',

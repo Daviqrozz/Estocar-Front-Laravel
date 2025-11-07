@@ -1,6 +1,9 @@
 @extends('adminlte::auth.auth-page', ['auth_type' => 'login'])
 
+@section('title','Login')
+
 @section('auth_header', 'Faça login para acessar o sistema')
+
 
 @section('auth_body')
 

@@ -50,8 +50,6 @@
     const API_URL = 'http://estocar-1.test/api'; 
     const CAR_API_ENDPOINT = '/lista/carros'; 
 
-    
-    //Helper que adiciona o Authorization Header e trata erros 401/403.
      
     async function  apiFetch(endpoint, options = {}) {
         const token = localStorage.getItem('api_token');
@@ -153,7 +151,6 @@
         });
     }
 
-  
     async function fetchCarros() {
         try {
             const response = await apiFetch(CAR_API_ENDPOINT, { method: 'GET' });
@@ -178,19 +175,19 @@
     window.viewCar = (id) => {
         window.location.href = `${EDIT_URL_BASE}/${id}`; 
     };
-    window.deleteCar = async (id) => { // 1. Corrigido: Função definida como 'async'
+    window.deleteCar = async (id) => {
         
-        // 4. Melhoria de Usabilidade: Confirmação antes de deletar
+       
         if (!confirm(`Tem certeza que deseja deletar o carro ID ${id}? Esta ação não pode ser desfeita.`)) {
-            return; // Sai da função se o usuário cancelar
+            return; 
         }
         
-        // Você pode mostrar um feedback visual temporário aqui, se quiser
+      
         const rowElement = document.querySelector(`[onclick="deleteCar(${id})"]`).closest('tr');
         const originalHtml = rowElement.innerHTML;
         rowElement.style.opacity = 0.5;
         
-        const CAR_DELETE_ENDPOINT = `/deletar/carro/${id}`; // 2. Corrigido: Define o endpoint DELETE com o ID
+        const CAR_DELETE_ENDPOINT = `/deletar/carro/${id}`;
         
         try {
             const response = await apiFetch(CAR_DELETE_ENDPOINT, {
@@ -198,24 +195,23 @@
             });
 
             if (response.ok) {
-                // Se for bem-sucedido, remove a linha da tabela sem recarregar a página
+       
                 rowElement.remove(); 
                 alert(`Carro ID ${id} deletado com sucesso!`);
             } else {
-                // Tenta ler a mensagem de erro da API
                 const errorData = await response.json().catch(() => ({ message: 'Erro desconhecido.' }));
                 throw new Error(errorData.message || response.statusText);
             }
         } catch (error) {
             console.error("Falha ao deletar:", error);
             alert(`Falha ao deletar carro ID ${id}: ${error.message}`);
-            
-            // Reverte o estado visual (se falhar)
+        
             if(rowElement) {
                 rowElement.style.opacity = 1;
             }
 
         }
+
     };
 
 </script>
