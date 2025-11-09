@@ -20,7 +20,7 @@ Route::get('/home', [ViewController::class, 'render'])->name('home')->defaults('
 
 Route::prefix('carros')->group(function () {
     // Nome da view: carros.carros
-    Route::get('/', [ViewController::class, 'render'])->name('carros.index')->defaults('viewName', 'carros.carros');
+    Route::get('/', [ViewController::class, 'render'])->name('carros.carros')->defaults('viewName', 'carros.carros');
     
     // Nome da view: carros.criar
     Route::get('/criar', [ViewController::class, 'render'])->name('carros.criar')->defaults('viewName', 'carros.criar');
