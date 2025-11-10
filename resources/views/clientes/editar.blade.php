@@ -19,36 +19,31 @@
 
     <div class="card-body">
         <form action="#" method="POST">
-            @csrf
-            @method('PUT')
+
 
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" class="form-control" value="João Silva">
+                <input type="text" id="nome" name="nome" class="form-control" >
+            </div>
+
+            <div class="form-group">
+                <label for="nome">Cpf</label>
+                <input type="text" id="cpf" name="cpf" class="form-control" >
             </div>
 
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" class="form-control" value="joao.silva@example.com">
+                <input type="email" id="email" name="email" class="form-control">
             </div>
 
             <div class="form-group">
                 <label for="telefone">Telefone</label>
-                <input type="text" id="telefone" name="telefone" class="form-control" value="(21) 98877-6655">
+                <input type="text" id="telefone" name="telefone" class="form-control" >
             </div>
 
             <div class="form-group">
                 <label for="endereco">Endereço</label>
-                <input type="text" id="endereco" name="endereco" class="form-control" value="Rua das Flores, 123 - Centro, Rio de Janeiro">
-            </div>
-
-            <div class="form-group">
-                <label for="status">Status</label>
-                <select id="status" name="status" class="form-control">
-                    <option selected>Ativo</option>
-                    <option>Inativo</option>
-                    <option>Pendente</option>
-                </select>
+                <input type="text" id="endereco" name="endereco" class="form-control">
             </div>
 
             <div class="mt-4">

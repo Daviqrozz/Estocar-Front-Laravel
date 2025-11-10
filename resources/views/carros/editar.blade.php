@@ -237,7 +237,7 @@
 
                 if (response.ok) {
                     // Redireciona para a lista após o sucesso
-                    window.location.href = '{{ route('carros.index') }}';
+                    window.location.href = '{{ route('carros.carros') }}';
                 } else {
                     const errorData = await response.json();
                     throw new Error(errorData.message || 'Erro desconhecido ao salvar.');
@@ -273,7 +273,7 @@
 
                 if (response.ok) {
                     // Redireciona para a lista após o sucesso
-                    window.location.href = '{{ route('carros.index') }}';
+                    window.location.href = '{{ route('carros.carros') }}';
                 } else {
                     const errorData = await response.json();
                     throw new Error(errorData.message || 'Erro desconhecido ao deletar.');

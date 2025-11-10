@@ -16,8 +16,6 @@
         </a>
     </div>
 
-    <!-- Atalho: Clientes -->
-
     <div class="col-md-3 col-sm-6 col-12">
         <a href="{{ route('clientes.clientes') }}" class="small-box bg-success">
             <div class="inner">
@@ -33,8 +31,6 @@
             </div>
         </a>
     </div>
-
-    <!-- Atalho: Relatórios -->
 
     <div class="info-box mb-3">
         <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>

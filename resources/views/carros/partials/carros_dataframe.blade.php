@@ -73,7 +73,6 @@
         if (response.status === 401 || response.status === 403) {
             console.error("Autenticação falhou. Token inválido/expirado.");
             localStorage.removeItem('api_token');
-            localStorage.removeItem('user_data');
             // Redireciona para o login
             window.location.href = '{{ route('login') }}';
             return Promise.reject(new Error("Não autorizado."));
@@ -82,7 +81,7 @@
         return response;
     }
 
-    //style da coluna status
+    
     function updateSelectColor(select) {
         const value = select.value;
         select.style.color = '#fff';
@@ -170,6 +169,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', fetchCarros);
+
     const EDIT_URL_BASE = "{{ url('/carros/editar') }}";
 
     window.viewCar = (id) => {
