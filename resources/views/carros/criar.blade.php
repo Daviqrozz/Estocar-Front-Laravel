@@ -113,7 +113,7 @@
 
                 if (response.ok) {
                     // Redireciona para a lista
-                    window.location.href = '{{ route('carros.index') }}'; 
+                    window.location.href = '{{ route('carros.carros') }}'; 
                 } else if (response.status === 401 || response.status === 403) {
                      // Tratamento de autenticação
                      localStorage.removeItem('api_token');
