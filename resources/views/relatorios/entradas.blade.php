@@ -70,7 +70,6 @@
                     <th>Placa</th>
                     <th>Valor (R$)</th>
                     <th>Data de Cadastro</th>
-                    <th>Usuario</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -83,7 +82,6 @@
                     <td>ABC-1234</td>
                     <td>58.900,00</td>
                     <td>05/10/2025</td>
-                    <td>{{Auth::user()->name}}</td>
                     <td><span class="badge bg-success">Disponível</span></td>
                 </tr>
 

@@ -136,9 +136,9 @@ return [
     'usermenu_enabled' => true,
     'usermenu_header' => false,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' =>false,
+    'usermenu_image' => false,
     'usermenu_desc' => false,
-    'usermenu_profile_url' =>false,
+    'usermenu_profile_url' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -298,70 +298,80 @@ return [
     |
     */
 
-// Arquivo: config/adminlte.php (APENAS A CHAVE 'menu')
+    // Arquivo: config/adminlte.php (APENAS A CHAVE 'menu')
 
-'menu' => [
-    // Navbar items:
-    // ------------------------------------------------------------------
-    // REMOVIDO: ['type' => 'usermenu'] (depende de Auth::user() do Laravel)
-    // ADICIONADO: Inclusão direta do seu partial customizado
-    [
-        'type'         => 'custom-html',
-        'item_html'    => '@include("dashboard.partials.usermenu")',
-        'topnav_right' => true,
-    ],
-    // ------------------------------------------------------------------
-    [
-        'type' => 'fullscreen-widget',
-        'topnav_right' => true,
-    ],
-    [
-        'type' => 'darkmode-widget',
-        'topnav_right' => true,
-    ],
+    'menu' => [
+        // Navbar items:
+        // ------------------------------------------------------------------
+        // REMOVIDO: ['type' => 'usermenu'] (depende de Auth::user() do Laravel)
+        // ADICIONADO: Inclusão direta do seu partial customizado
+        [
+            'type'         => 'custom-html',
+            'item_html'    => '@include("dashboard.partials.usermenu")',
+            'topnav_right' => true,
+        ],
+        // ------------------------------------------------------------------
+        [
+            'type' => 'fullscreen-widget',
+            'topnav_right' => true,
+        ],
+        [
+            'type' => 'darkmode-widget',
+            'topnav_right' => true,
+        ],
 
-    // Sidebar items:
-    ['header' => 'Menu'],
-    [
-        'text' => 'Dashboard',
-        'url' => '/',
-        'icon' => 'fas fa-chart-bar',
-    ],
-    [
-        'text' => 'Carros',
-        'url' => '/carros',
-        'icon' => 'fas fa-fw fa-car',
-    ],
-    [
-        'text' => 'Pessoas',
-        'icon' => 'fas fa-fw fa-user',
-        'submenu' => [
-            [
-                'text' => 'Usuarios',
-                'url' => '/usuarios',
-            ],
-            [
-                'text' => 'Clientes',
-                'url' => '/clientes',
+        // Sidebar items:
+        ['header' => 'Menu'],
+        [
+            'text' => 'Dashboard',
+            'url' => '/',
+            'icon' => 'fas fa-chart-bar',
+        ],
+        [
+            'text' => 'Vendas',
+            'url' => '/vendas',
+            'icon' => 'fa fa-dollar-sign',
+        ],
+         [
+            'text' => 'Serviços',
+            'url' => '/servicos',
+            'icon' => 'fa fa-wrench',
+        ],
+        [
+            'text' => 'Carros',
+            'url' => '/carros',
+            'icon' => 'fas fa-fw fa-car',
+        ],
+        [
+            'text' => 'Pessoas',
+            'icon' => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Usuarios',
+                    'url' => '/usuarios',
+                ],
+                [
+                    'text' => 'Clientes',
+                    'url' => '/clientes',
+                ],
             ],
         ],
+        [
+            'text' => 'Relatorios',
+            'url' => 'admin/settings',
+            'icon' => 'fas fa-file-alt',
+            'submenu' => [
+                [
+                    'text' => 'Relatorio de vendas',
+                    'url' => '/relatorios/vendas'
+                ],
+                [
+                    'text' => 'Relatorio de servicos',
+                    'url' => '/relatorios/servicos'
+                ],
+            ]
+        ],
     ],
-    [
-        'text' => 'Relatorios',
-        'url' => 'admin/settings',
-        'icon' => 'fas fa-file-alt',
-        'submenu' => [
-            [
-                'text' => 'Relatorio de vendas',
-                'url' => '/relatorios/vendas'
-            ],
-            [
-                'text' => 'Relatorio de entradas',
-                'url' => '/relatorios/entradas'
-            ],
-        ]
-    ],
-],
 
     /*
     |--------------------------------------------------------------------------

@@ -20,13 +20,23 @@ Route::get('register', [ViewController::class, 'render'])->name('register')->def
 Route::get('/home', [ViewController::class, 'render'])->name('home')->defaults('viewName', 'dashboard.dashboard');
 
 
+Route::prefix('vendas')->group(function () {
+    // Nome da view: vendas.carros
+    Route::get('/', [ViewController::class, 'render'])->name('vendas.vendas')->defaults('viewName', 'vendas.vendas');
+
+    // Nome da view: vendas.criar
+    Route::get('/criar', [ViewController::class, 'render'])->name('carros.criar')->defaults('viewName', 'carros.criar');
+    // Nome da view: vendas.editar
+
+});
+
 Route::prefix('carros')->group(function () {
     // Nome da view: carros.carros
     Route::get('/', [ViewController::class, 'render'])->name('carros.carros')->defaults('viewName', 'carros.carros');
-    
+
     // Nome da view: carros.criar
     Route::get('/criar', [ViewController::class, 'render'])->name('carros.criar')->defaults('viewName', 'carros.criar');
-    
+
     // Nome da view: carros.editar
     Route::get('/editar/{carro}', [CarroViewController::class, 'update'])->name('carros.editar');
 });
@@ -40,7 +50,7 @@ Route::prefix('usuarios')->group(function () {
     Route::get('/criar', [ViewController::class, 'render'])->name('usuarios.criar')->defaults('viewName', 'users.criar');
 
     // Nome da view: users.editar
-    Route::get('/editar/{usuario}', [UserViewController::class,'update'])->name('usuarios.editar');
+    Route::get('/editar/{usuario}', [UserViewController::class, 'update'])->name('usuarios.editar');
 });
 
 
@@ -59,7 +69,7 @@ Route::prefix('clientes')->group(function () {
 Route::prefix('relatorios')->group(function () {
     // Nome da view: relatorios.vendas
     Route::get('/vendas', [ViewController::class, 'render'])->name('relatorios.vendas')->defaults('viewName', 'relatorios.vendas');
-    
+
     // Nome da view: relatorios.entradas
     Route::get('/entradas', [ViewController::class, 'render'])->name('relatorios.entradas')->defaults('viewName', 'relatorios.entradas');
 });

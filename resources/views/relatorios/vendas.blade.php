@@ -68,7 +68,6 @@
                     <th>Carro</th>
                     <th>Data da Venda</th>
                     <th>Valor (R$)</th>
-                    <th>Usuario</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -78,8 +77,7 @@
                     <td>João Silva</td>
                     <td>Fiat Argo</td>
                     <td>10/10/2025</td>
-                    <td>58.900,00</td>
-                    <td>{{Auth::user()->name}}</td>
+                    <td>58.900,00</td> 
                     <td><span class="badge bg-success">Concluída</span></td>
                 </tr>
 
