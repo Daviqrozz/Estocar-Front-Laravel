@@ -27,8 +27,8 @@
 <script>
     const API_URL = 'http://estocar-1.test/api';
     const USERS_ENDPOINT = '/lista/users'; // Endpoint para buscar usuários
-    const EDIT_URL_BASE = "{{ url('/users/editar') }}"; // Rota de edição de usuário
-    const DELETE_URL_BASE = "/deletar/user"; // Endpoint base para deleção de usuário
+    const EDIT_URL_BASE = "{{ url('/usuarios/editar') }}"; // Rota de edição de usuário
+    const DELETE_URL_BASE = "/deletar/usuario"; // Endpoint base para deleção de usuário
 
     // Helper que adiciona o Authorization Header e trata erros 401/403.
     async function apiFetch(endpoint, options = {}) {

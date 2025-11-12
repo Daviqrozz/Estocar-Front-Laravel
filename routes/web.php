@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\CarroViewController;
 use App\Http\Controllers\ClienteViewController;
-
+use App\Http\Controllers\UserViewController;
 
 // Redireciona a raiz para /home
 Route::get('/', function () {
@@ -34,13 +34,13 @@ Route::prefix('carros')->group(function () {
 
 Route::prefix('usuarios')->group(function () {
     // Nome da view: users.users
-    Route::get('/', [ViewController::class, 'render'])->name('usuarios.users')->defaults('viewName', 'users.users');
+    Route::get('/', [ViewController::class, 'render'])->name('usuarios.usuarios')->defaults('viewName', 'users.users');
 
     // Nome da view: users.criar
-    Route::get('/criar', [ViewController::class, 'render'])->name('users.criar')->defaults('viewName', 'users.criar');
+    Route::get('/criar', [ViewController::class, 'render'])->name('usuarios.criar')->defaults('viewName', 'users.criar');
 
     // Nome da view: users.editar
-    Route::get('/editar/{usuario}', [UserViewController::class, 'render'])->name('users.editar')->defaults('viewName', 'users.editar');
+    Route::get('/editar/{usuario}', [UserViewController::class,'update'])->name('usuarios.editar');
 });
 
 
