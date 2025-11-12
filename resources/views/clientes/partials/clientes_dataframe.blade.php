@@ -14,7 +14,7 @@
                     <th>Telefone</th>
                     <th>Email</th>
                     <th>Endereço</th>
-                    <th style="width: 100px;">Ações</th>
+                    <th style="width: 100px;">Ações</th> 
                 </tr>
             </thead>
             <tbody id="clientes_body">

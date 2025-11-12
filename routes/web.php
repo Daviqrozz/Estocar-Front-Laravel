@@ -5,6 +5,7 @@ use App\Http\Controllers\ViewController;
 use App\Http\Controllers\CarroViewController;
 use App\Http\Controllers\ClienteViewController;
 
+
 // Redireciona a raiz para /home
 Route::get('/', function () {
     return redirect('/home');
@@ -39,7 +40,7 @@ Route::prefix('usuarios')->group(function () {
     Route::get('/criar', [ViewController::class, 'render'])->name('users.criar')->defaults('viewName', 'users.criar');
 
     // Nome da view: users.editar
-    Route::get('/editar/{usuario}', [ViewController::class, 'render'])->name('users.editar')->defaults('viewName', 'users.editar');
+    Route::get('/editar/{usuario}', [UserViewController::class, 'render'])->name('users.editar')->defaults('viewName', 'users.editar');
 });
 
 
