@@ -2,15 +2,6 @@
 
 @section('title', 'Carros')
 
-@section('content_header')
-<div class="d-flex justify-content-between align-items-center">
-    <h2>Carros cadastrados na plataforma</h2>
-    <a href="{{ route('carros.criar') }}" class="btn btn-primary">
-        <i class="fas fa-plus"></i> Cadastrar
-    </a>
-</div>
-@endsection
-
 @section('content')
 
 @include('layouts.token_check')
@@ -51,7 +42,7 @@
     const CAR_API_ENDPOINT = '/lista/carros'; 
 
      
-    async function  apiFetch(endpoint, options = {}) {
+    async function apiFetch(endpoint, options = {}) {
         const token = localStorage.getItem('api_token');
         const fetchUrl = `${API_URL}${endpoint}`;
 
@@ -80,7 +71,6 @@
 
         return response;
     }
-
     
     function updateSelectColor(select) {
         const value = select.value;

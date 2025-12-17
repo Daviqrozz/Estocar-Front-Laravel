@@ -4,7 +4,6 @@
 
 @section('auth_header', 'Faça login para acessar o sistema')
 
-
 @section('auth_body')
 
     <form id="login-form">
