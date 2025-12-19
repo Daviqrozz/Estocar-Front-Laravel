@@ -1,7 +1,5 @@
 @section('content')
 
-@include('layouts.token_check')
-
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Lista de Transações</h3>
@@ -187,12 +185,12 @@
         } catch (error) {
             console.error("Falha ao atualizar status:", error);
             alert(`Falha ao atualizar venda: ${error.message}`);
-            fetchVendas(); // Recarrega tabela
+            fetchVendas();
         }
     };
 
     window.deletarVenda = async (id) => {
-        if (!confirm(`Tem certeza que deseja deletar a venda ID ${id}? Esta ação não pode ser desfeita.`)) {
+        if (!confirm(`Tem certeza que deseja deletar a venda ${id}? Esta ação não pode ser desfeita.`)) {
             return;
         }
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\ViewController;
 use App\Http\Controllers\CarroViewController;
 use App\Http\Controllers\ClienteViewController;
 use App\Http\Controllers\UserViewController;
+use App\Http\Controllers\VendaViewController;
 
 // Redireciona a raiz para /home
 Route::get('/', function () {
@@ -23,7 +24,8 @@ Route::get('/home', [ViewController::class, 'render'])->name('home')->defaults('
 Route::prefix('vendas')->group(function () {
     // Nome da view: vendas.carros
     Route::get('/', [ViewController::class, 'render'])->name('vendas.vendas')->defaults('viewName', 'vendas.vendas');
-
+    // Nome da view: venda.editar
+    Route::get('/editar/{venda}', [VendaViewController::class, 'update'])->name('venda.editar');
     // Nome da view: vendas.criar
     Route::get('/criar', [ViewController::class, 'render'])->name('carros.criar')->defaults('viewName', 'carros.criar');
     // Nome da view: vendas.editar
@@ -68,8 +70,6 @@ Route::prefix('clientes')->group(function () {
 
 Route::prefix('relatorios')->group(function () {
     // Nome da view: relatorios.vendas
-    Route::get('/vendas', [ViewController::class, 'render'])->name('relatorios.vendas')->defaults('viewName', 'relatorios.vendas');
-
     // Nome da view: relatorios.entradas
     Route::get('/entradas', [ViewController::class, 'render'])->name('relatorios.entradas')->defaults('viewName', 'relatorios.entradas');
 });
