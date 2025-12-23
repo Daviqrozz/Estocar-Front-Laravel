@@ -137,7 +137,7 @@
             updateSelectColor(newSelect);
             newSelect.addEventListener('change', (e) => {
                 updateSelectColor(newSelect);
-                atualizarStatusVenda(venda.id, e.target.value);
+                updateStatusVenda(venda.id, e.target.value);
             });
         });
     }
@@ -168,7 +168,7 @@
         window.location.href = `${EDIT_URL_BASE}/${id}`;
     };
 
-    window.atualizarStatusVenda = async (id, novoStatus) => {
+    window.updateStatusVenda = async (id, novoStatus) => {
         try {
             const response = await apiFetch(`/editar/venda/${id}`, {
                 method: 'PUT',

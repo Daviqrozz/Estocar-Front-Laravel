@@ -167,19 +167,25 @@
 
         async function loadCarros() {
             try {
+
                 const response = await apiFetch(CARRO_FETCH_ENDPOINT, {
                     method: 'GET'
                 })
 
                 if (response.ok) {
                     const data = await response.json()
+                    if (data.carros.status == 1) {
+                        
+                    }
+                   
                     const carros = data.carros
+
+                    
 
                     const carro_select = document.getElementById('carro_select')
 
-                    carros.forEach(carro => {
+                    carros.filter(carro => carro.status === 1).forEach(carro => {
                         const carro_option = document.createElement('option')
-
                         carro_option.textContent = `${carro.id} - ${carro.marca} ${carro.modelo}`
 
                         carro_option.value = `${carro.id}`
@@ -188,9 +194,11 @@
 
                     });
                 } else {
+
                     const errorData = await response.json();
                     throw new Error(errorData.message || `Erro ao buscar dado: ${response.statusText}`);
                 }
+
             } catch (error) {
                 console.error("Falha ao carregar os dados:", error);
                 const carro_default_option = document.getElementById('carro_default_option')
