@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'Editar Venda')
-
+@include('layouts.token_check')
 @section('content_header')
     <div class="d-flex justify-content-between">
         <h2>Editar Venda - <span id="venda-id">{{ $vendaID }}</span></h2>
@@ -17,7 +17,6 @@
 @stop
 
 @section('content')
-    @include('layouts.token_check')
 
     <div class="card">
         <div class="card-header">

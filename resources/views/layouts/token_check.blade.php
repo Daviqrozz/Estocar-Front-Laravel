@@ -6,9 +6,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('api_token');
+            
+            //DEBUG
             const debug = document.getElementById('debug')
             const debugButton = document.getElementById('debugButton')
-            //DEBUG
             debugButton.addEventListener('click',() => {
                if (debug.style.display === 'none') {
                     debug.style.display = 'block'

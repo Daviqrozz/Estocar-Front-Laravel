@@ -27,7 +27,7 @@ Route::prefix('vendas')->group(function () {
     // Nome da view: venda.editar
     Route::get('/editar/{venda}', [VendaViewController::class, 'update'])->name('venda.editar');
     // Nome da view: vendas.criar
-    Route::get('/criar', [ViewController::class, 'render'])->name('carros.criar')->defaults('viewName', 'carros.criar');
+    Route::get('/criar', [ViewController::class, 'render'])->name('vendas.criar')->defaults('viewName', 'vendas.criar');
     // Nome da view: vendas.editar
 
 });
