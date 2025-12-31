@@ -6,7 +6,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('api_token');
-            
+            const me_endpoint = 'http://estocar-1.test/api/me'
             //DEBUG
             const debug = document.getElementById('debug')
             const debugButton = document.getElementById('debugButton')

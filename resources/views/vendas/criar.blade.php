@@ -180,8 +180,6 @@
                    
                     const carros = data.carros
 
-                    
-
                     const carro_select = document.getElementById('carro_select')
 
                     carros.filter(carro => carro.status === 1).forEach(carro => {

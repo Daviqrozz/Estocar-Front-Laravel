@@ -20,8 +20,7 @@ class ViewController extends Controller
      */
     public function render(string $viewName)
     {
-        // Simplesmente retorna a view.
-        // Toda a complexidade (autenticação, fetch de dados) está no JavaScript.
+        //Retorna a view.
         return view($viewName);
     }
 }

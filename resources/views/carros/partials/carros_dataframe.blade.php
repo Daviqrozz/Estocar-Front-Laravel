@@ -128,6 +128,7 @@
                     <button class="btn btn-xs btn-danger" onclick="deleteCar(${carro.id})">
                         <i class="fas fa-trash"></i>
                     </button>
+                    
                 </td>
             `;
                 body.appendChild(row);
