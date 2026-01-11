@@ -71,7 +71,8 @@ Route::prefix('clientes')->group(function () {
 Route::prefix('relatorios')->group(function () {
     // Nome da view: relatorios.vendas
     // Nome da view: relatorios.entradas
-    Route::get('/entradas', [ViewController::class, 'render'])->name('relatorios.entradas')->defaults('viewName', 'relatorios.entradas');
+    Route::get('/vendas', [ViewController::class, 'render'])->name('relatorios.vendas')->defaults('viewName', 'relatorios.vendas');
+    Route::get('/servicos', [ViewController::class, 'render'])->name('relatorios.servicos')->defaults('viewName', 'relatorios.servicos');
 });
 
 Route::prefix('servicos')->group(function () {
