@@ -297,6 +297,7 @@
                 submitButton.innerText = 'Salvar Alterações';
             }
         }
+        
         // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
             loadClientes()

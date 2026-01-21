@@ -83,6 +83,29 @@
             });
         }
 
+        async function deleteOs(id) {
+            if (!confirm('Deseja realmente excluir esta OS?')) return;
+
+            try {
+                const response = await apiFetch(`/deletar/ordem-servico/${id}`, {
+                    method: 'DELETE',
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Erro ao deletar OS.');
+                }
+
+                alert(`OS ${id} deletada com sucesso!`);
+                await carregarTabelaOS(); // recarrega os dados, igual fetchVendas()
+
+            } catch (error) {
+                console.error('Falha ao deletar OS:', error);
+                alert(`Erro ao deletar: ${error.message}`);
+            }
+        }
+
+
         async function carregarTabelaOS() {
             try {
                 const response = await apiFetch(ORDENS_ENDPOINT, {
@@ -117,7 +140,7 @@
                     const carroModelo = os.carro && os.carro.modelo ? os.carro.modelo : '';
                     const carroAno = os.carro && os.carro.ano ? os.carro.ano : '';
                     const carroTexto = carroModelo ? `${carroModelo} ${carroAno}`.trim() : '-'
-                    
+
                     let servicoNome = '-';
                     if (Array.isArray(os.registros) && os.registros.length > 0) {
                         const reg = os.registros[0];
@@ -138,13 +161,13 @@
         <td><span class="${statusInfo.classe}">${statusInfo.label}</span></td>
         <td>${dataAbertura}</td>
         <td>
-          <button class="btn btn-xs btn-info" onclick="viewCar(${os.id})">
+          <button class="btn btn-xs btn-info">
                         <i class="fas fa-pen"></i>
                     </button>
-          <button class="btn btn-xs btn-danger" onclick="deleteCar(${os.id})">
+          <button class="btn btn-xs btn-danger" onclick="deleteOs(${os.id})">
                         <i class="fas fa-trash"></i>
                     </button>
-                    <button class="btn btn-xs btn-primary" onclick="deleteCar(${os.id})">
+                    <button class="btn btn-xs btn-primary">
                         <i class="fas fa-eye"></i>
                     </button>
                     
