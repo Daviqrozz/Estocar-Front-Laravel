@@ -116,9 +116,8 @@
                     const clienteNome = os.cliente && os.cliente.nome ? os.cliente.nome : '-';
                     const carroModelo = os.carro && os.carro.modelo ? os.carro.modelo : '';
                     const carroAno = os.carro && os.carro.ano ? os.carro.ano : '';
-                    const carroTexto = carroModelo ? `${carroModelo} ${carroAno}`.trim() : '-';
-
-                    // Serviço individual (primeiro registro, se existir)
+                    const carroTexto = carroModelo ? `${carroModelo} ${carroAno}`.trim() : '-'
+                    
                     let servicoNome = '-';
                     if (Array.isArray(os.registros) && os.registros.length > 0) {
                         const reg = os.registros[0];
