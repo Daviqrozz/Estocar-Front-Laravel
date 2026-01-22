@@ -105,7 +105,7 @@
             }
         }
 
-        const EDIT_OS_URL_BASE = "{{ url('/ordens-servico/editar') }}";
+        const EDIT_OS_URL_BASE = "{{ url('servicos/ordem/editar') }}";
 
         window.editarOs = (id) => {
             window.location.href = `${EDIT_OS_URL_BASE}/${id}`;

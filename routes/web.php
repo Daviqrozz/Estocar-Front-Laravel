@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\CarroViewController;
 use App\Http\Controllers\ClienteViewController;
+use App\Http\Controllers\ServicoViewController;
 use App\Http\Controllers\UserViewController;
 use App\Http\Controllers\VendaViewController;
 
@@ -79,5 +80,5 @@ Route::prefix('servicos')->group(function () {
     // Nome da view: relatorios.vendas
     // Nome da view: relatorios.entradas
     Route::get('/', [ViewController::class, 'render'])->name('servicos.servicos')->defaults('viewName', 'servicos.servicos');
-    Route::get('/editar/{servico}', [ViewController::class, 'update'])->name('servico.editar');
+    Route::get('/ordem/editar/{servico}', [ServicoViewController::class, 'update'])->name('servicos.editar');
 });
