@@ -97,7 +97,7 @@
                 }
 
                 alert(`OS ${id} deletada com sucesso!`);
-                await carregarTabelaOS(); // recarrega os dados, igual fetchVendas()
+                await carregarTabelaOS(); 
 
             } catch (error) {
                 console.error('Falha ao deletar OS:', error);
@@ -105,6 +105,11 @@
             }
         }
 
+        const EDIT_OS_URL_BASE = "{{ url('/ordens-servico/editar') }}";
+
+        window.editarOs = (id) => {
+            window.location.href = `${EDIT_OS_URL_BASE}/${id}`;
+        }
 
         async function carregarTabelaOS() {
             try {
@@ -161,13 +166,13 @@
         <td><span class="${statusInfo.classe}">${statusInfo.label}</span></td>
         <td>${dataAbertura}</td>
         <td>
-          <button class="btn btn-xs btn-info">
+          <button class="btn btn-xs btn-info" onclick="editarOs(${os.id})">
                         <i class="fas fa-pen"></i>
                     </button>
           <button class="btn btn-xs btn-danger" onclick="deleteOs(${os.id})">
                         <i class="fas fa-trash"></i>
                     </button>
-                    <button class="btn btn-xs btn-primary">
+                    <button class="btn btn-xs btn-primary" onclick="alert('Em breve!');">
                         <i class="fas fa-eye"></i>
                     </button>
                     

@@ -79,4 +79,5 @@ Route::prefix('servicos')->group(function () {
     // Nome da view: relatorios.vendas
     // Nome da view: relatorios.entradas
     Route::get('/', [ViewController::class, 'render'])->name('servicos.servicos')->defaults('viewName', 'servicos.servicos');
+    Route::get('/editar/{servico}', [ViewController::class, 'update'])->name('servico.editar');
 });

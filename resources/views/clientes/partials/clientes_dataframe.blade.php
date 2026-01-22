@@ -14,7 +14,7 @@
                     <th>Telefone</th>
                     <th>Email</th>
                     <th>Endereço</th>
-                    <th style="width: 100px;">Ações</th> 
+                    <th style="width: 100px;">Ações</th>
                 </tr>
             </thead>
             <tbody id="clientes_body">
@@ -38,13 +38,22 @@
                 window.location.href = '{{ route('login') }}';
             }
 
+            const defaultHeaders = {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`,
+                ...(options.method === 'POST' || options.method === 'PUT' || options.method === 'PATCH' ? {
+                    'Content-Type': 'application/json'
+                } : {}),
+            };
+
             const response = await fetch(fetchUrl, {
-                options,
+                ...options,
                 headers: {
-                    'Accept': 'application/json',
-                    'Authorization': `Bearer ${token}`,
+                    ...defaultHeaders,
+                    ...(options.headers || {}),
                 },
-            })
+                body: options.body
+            });
 
             if (response.status === 401 || response.status === 403) {
                 console.error("Autenticação falhou. Token inválido/expirado.");
@@ -59,14 +68,14 @@
         }
 
         function renderClientesTable(clientes) {
-        const body = document.getElementById('clientes_body');
-        body.innerHTML = ''; 
+            const body = document.getElementById('clientes_body');
+            body.innerHTML = '';
 
-        clientes.forEach(cliente => {
+            clientes.forEach(cliente => {
 
-            // Monta a linha da tabela
-            const row = document.createElement('tr');
-            row.innerHTML = `
+                // Monta a linha da tabela
+                const row = document.createElement('tr');
+                row.innerHTML = `
                 <td>${cliente.id}</td>
                 <td>
                     <a href="{{ url('/clientes/editar') }}/${cliente.id}" class="text-primary">
@@ -78,78 +87,67 @@
                 <td>${cliente.email}</td>
                 <td>${cliente.endereco}</td>
                 <td>
-                    <button class="btn btn-xs btn-info" onclick="viewCar(${cliente.id})">
+                    <button class="btn btn-xs btn-info" onclick="viewCliente(${cliente.id})">
                         <i class="fas fa-pen"></i>
                     </button>
-                    <button class="btn btn-xs btn-danger" onclick="deleteCar(${cliente.id})">
+                    <button class="btn btn-xs btn-danger" onclick="deleteCliente(${cliente.id})">
                         <i class="fas fa-trash"></i>
                     </button>
                 </td>
             `;
-            body.appendChild(row);
-        });
-    }
-     async function fetchClientes() {
-        try {
-            const response = await apiFetch(CLIENTES_ENDPOINT, { method: 'GET' });
-            
-            if (response.ok) {
-                const data = await response.json();
-                renderClientesTable(data.clientes || data); 
-            } else {
-                document.getElementById('clientes_body').innerHTML = `<tr><td colspan="7" class="text-center text-danger">Erro ao carregar os clientes: ${response.statusText}</td></tr>`;
-            }
-
-        } catch (error) {
-            console.error("Falha fatal no Fetch:", error);
-         
-            document.getElementById('clientes_body').innerHTML = `<tr><td colspan="7" class="text-center text-danger">Falha de comunicação com o servidor.</td></tr>`;
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', fetchClientes);
-
-    const EDIT_URL_BASE = "{{ url('/clientes/editar') }}";
-
-    window.viewCar = (id) => {
-        window.location.href = `${EDIT_URL_BASE}/${id}`; 
-    };
-    window.deleteCar = async (id) => {
-        
-       
-        if (!confirm(`Tem certeza que deseja deletar o carro ID ${id}? Esta ação não pode ser desfeita.`)) {
-            return; 
-        }
-        
-      
-        const rowElement = document.querySelector(`[onclick="deleteCar(${id})"]`).closest('tr');
-        const originalHtml = rowElement.innerHTML;
-        rowElement.style.opacity = 0.5;
-        
-        const CAR_DELETE_ENDPOINT = `/deletar/carro/${id}`;
-        
-        try {
-            const response = await apiFetch(CAR_DELETE_ENDPOINT, {
-                method: 'DELETE'
+                body.appendChild(row);
             });
+        }
+        async function fetchClientes() {
+            try {
+                const response = await apiFetch(CLIENTES_ENDPOINT, {
+                    method: 'GET'
+                });
 
-            if (response.ok) {
-       
-                rowElement.remove(); 
-                alert(`Carro ID ${id} deletado com sucesso!`);
-            } else {
-                const errorData = await response.json().catch(() => ({ message: 'Erro desconhecido.' }));
-                throw new Error(errorData.message || response.statusText);
-            }
-        } catch (error) {
-            console.error("Falha ao deletar:", error);
-            alert(`Falha ao deletar carro ID ${id}: ${error.message}`);
-        
-            if(rowElement) {
-                rowElement.style.opacity = 1;
-            }
+                if (response.ok) {
+                    const data = await response.json();
+                    renderClientesTable(data.clientes || data);
+                } else {
+                    document.getElementById('clientes_body').innerHTML =
+                        `<tr><td colspan="7" class="text-center text-danger">Erro ao carregar os clientes: ${response.statusText}</td></tr>`;
+                }
 
+            } catch (error) {
+                console.error("Falha fatal no Fetch:", error);
+
+                document.getElementById('clientes_body').innerHTML =
+                    `<tr><td colspan="7" class="text-center text-danger">Falha de comunicação com o servidor.</td></tr>`;
+            }
         }
 
-    };
+        document.addEventListener('DOMContentLoaded', fetchClientes);
+
+        const EDIT_URL_BASE = "{{ url('/clientes/editar') }}";
+
+
+        window.viewCliente = (id) => {
+            window.location.href = `${EDIT_URL_BASE}/${id}`;
+        };
+
+        async function deleteCliente(id) {
+            if (!confirm('Deseja realmente exluir este cliente?')) return;
+
+            try {
+                const response = await apiFetch(`/deletar/cliente/${id}`, {
+                    method: 'DELETE',
+                })
+
+                if (!response.ok) {
+                    const errorData = await response.json()
+                    throw new Error(errorData.message || 'Erro ao deletar cliente')
+                }
+
+                alert(`Cliente ${id} deletado com sucesso`)
+                window.location.href = '{{url('/clientes')}}'
+
+            } catch (error) {
+                console.error('Falha ao deletar cliente:', error);
+                alert(`Erro ao deletar: ${error.message}`);
+            }
+        }
     </script>
